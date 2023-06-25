@@ -14,13 +14,19 @@ def three_frame(world, n_seq, seed=17):
     n_seq: 3-tuple, number of steps before each draw
     seed: random see for NumPy
     """
+    random_par = 'Random' if world.random else 'Segregated'
+    neighbour_str = 'Four-neighbour' if world.static_neighbours else 'Dynamic-size'
+    
     np.random.seed(seed)
     plt.figure(figsize=(10, 4))
+    plt.suptitle(f'{world.n} by {world.n} model \n{random_par} initialization and {neighbour_str} order parameter kernel \nInside radius: {world.r_i}, Outside radius: {world.r_o}\n')
 
     for i, n in enumerate(n_seq):
         plt.subplot(1, 3, i+1)
+        plt.title(f'Step {n}')
         world.loop(n)
-        world.draw()
+        plt.xlabel(f'Order parameter: {world.order_parameter}', fontsize=12)
+        world.draw(True)
 
     plt.tight_layout()
     

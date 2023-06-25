@@ -47,10 +47,15 @@ class Cell2D:
         for i in range(iters):
             self.step()
 
-    def draw(self, **options):
+    def draw(self, three_frame=False, **options):
         """Draws the array.
         """
+        random_par = 'Random' if self.random else 'Segregated'
+        neighbour_str = 'Four-neighbour' if self.static_neighbours else 'Dynamic-size'
+
         draw_array(self.array, **options)
+        if not three_frame:
+            plt.title(f'{self.n} by {self.n} model \n{random_par} initialization \n{neighbour_str} order parameter kernel \nInside radius: {self.r_i}, Outside radius: {self.r_o} \n\n Step {self.steps}')
 
     def animate(self, frames, interval=None, step=None):
         """Animate the automaton.
@@ -59,19 +64,32 @@ class Cell2D:
         interval: time between frames in seconds
         iters: number of steps between frames
         """
+        random_par = 'Random' if self.random else 'Segregated'
+        neighbour_str = 'Four-neighbour' if self.static_neighbours else 'Dynamic-size'
+
         if step is None:
             step = self.step
             
         plt.figure()
         try:
-            for i in range(frames-1):
+            for i in range(frames):
                 self.draw()
+                plt.title(f'{self.n} by {self.n} model \n{random_par} initialization \n{neighbour_str} order parameter kernel \nInside radius: {self.r_i}, Outside radius: {self.r_o} \n\nStep {self.steps}')
+                
+                perct = np.around(self.greens / (self.n**2) * 100, 2)
+                plt.xlabel(f'Order parameter: {self.order_parameter}')
+                
                 plt.show()
                 if interval:
                     sleep(interval)
                 step()
                 clear_output(wait=True)
             self.draw()
+            plt.title(f'{self.n} by {self.n} model \n{random_par} initialization \n{neighbour_str} order parameter kernel \nInside radius: {self.r_i}, Outside radius: {self.r_o} \n\nStep {self.steps}')
+            
+            perct = np.around(self.greens / (self.n**2) * 100, 2)
+            plt.xlabel(f'Order parameter: {self.order_parameter}')
+
             plt.show()
         except KeyboardInterrupt:
             pass
