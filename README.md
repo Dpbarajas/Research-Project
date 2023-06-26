@@ -1,6 +1,6 @@
 # Research-Project
 
-This project is part of the TU Delft Q4 CSE3000 Research Project of 2023 and acts as support for the research paper and project that was conducted in the 10 weeks that this project lasted. 
+This project is part of the TU Delft Q4 CSE3000 Research Project of 2023 and acts as support for the research paper and project that was conducted in the 10 weeks that this project lasted. The GitHub page can be found [here](https://github.com/TU-Delft-CSE/Research-Project). 
 
 It implements a Reaction-Diffusion model in a Cellular Automata, in the form of a class called ReactionDiffusion, in orer to create Turing patterns. The class also includes a formula and calculation steps for the order parameter, which acts as an indicator of the segregation state of the world. 
 
